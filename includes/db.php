@@ -1,7 +1,7 @@
 <?php
 // Database connection settings
 $host = 'localhost';
-$db   = 'qurban_reseller_affiliate';
+$db   = 'qurban_app';
 $user = 'root';
 $pass = '';
 $charset = 'utf8mb4';
@@ -17,6 +17,13 @@ $options = [
 try {
     $pdo = new PDO($dsn, $user, $pass, $options);
 } catch (\PDOException $e) {
-    throw new \PDOException($e->getMessage(), (int)$e->getCode());
+    // Log error details
+    error_log("Database Connection Error: " . $e->getMessage());
+    
+    // Show user-friendly error message
+    die("Sorry, we're experiencing technical difficulties. Please try again later.");
 }
+
+// Set timezone
+date_default_timezone_set('Asia/Jakarta');
 ?>
